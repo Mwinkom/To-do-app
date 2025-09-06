@@ -17,7 +17,7 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-@media (max-width: 375px) {
+@media (max-width: 456px) {
   header {
     padding-inline: 1.5rem;
   }
@@ -81,7 +81,12 @@ main {
   flex-direction: column;
   gap: 35px;
 }
-@media (max-width: 375px) {
+@media (max-width: 765px) {
+  main {
+    margin: 2.5rem 1.7rem;
+  }
+}
+@media (max-width: 456px) {
   main {
     margin: 2.5rem 1.7rem;
   }
@@ -97,18 +102,106 @@ main .card-wrapper .to-do-header {
   align-items: center;
 }
 main .card-wrapper .to-do-header h4 {
-  color: rgb(65, 65, 65);
+  color: rgb(79, 79, 79);
   font-size: 1rem;
   font-weight: 600;
 }
 main .card-wrapper .to-do-header .button {
   padding: 0.3rem 0.8rem;
-}
-main .card-wrapper .to-do-container {
+  border: 2px solid #91c8f8;
+  border-radius: 10px;
   background-color: white;
-  padding: 1.5rem;
+  color: #0078b8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all ease-in 0.4s;
+}
+main .card-wrapper .to-do-header .button:hover {
+  color: white;
+  background-color: #0078b8;
+  border: 2px solid #0078b8;
+  cursor: pointer;
+}
+main .card-wrapper .todo-task-row {
+  background-color: white;
+  color: rgb(95, 95, 95);
+  padding: 1rem 1.5rem;
   box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+main .card-wrapper .todo-task-row .task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+main .card-wrapper .todo-task-row .task .todo-task {
+  accent-color: rgb(212, 255, 203);
+  appearance: none;
+  border: 1px solid rgb(58, 136, 43);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+main .card-wrapper .todo-task-row .task .todo-task:checked {
+  background-color: rgb(151, 242, 133);
+  border-color: rgb(151, 242, 133);
+}
+main .card-wrapper .todo-task-row .task .todo-task:checked::after {
+  content: "";
+  position: absolute;
+  top: 1.8px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid green;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+main .card-wrapper .todo-task-row .task img {
+  width: 25px;
+}
+main .card-wrapper .todo-task-row .category {
+  background-color: rgb(212, 255, 203);
+  color: rgb(58, 136, 43);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+@media (max-width: 456px) {
+  main .card-wrapper .todo-task-row .category {
+    display: none;
+  }
+}
+main .card-wrapper .todo-task-row .date {
+  background-color: rgb(254, 212, 255);
+  color: rgb(160, 27, 162);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+@media (max-width: 456px) {
+  main .card-wrapper .todo-task-row .date {
+    display: none;
+  }
+}
+main .card-wrapper .todo-task-row .delete-btn {
+  font-size: 1rem;
+  color: rgb(95, 95, 95);
+  border: none;
+  transition: all ease-in 0.3s;
+  background-color: transparent;
+  box-shadow: none;
+}
+main .card-wrapper .todo-task-row .delete-btn:hover {
+  cursor: pointer;
+  color: gray;
 }
 
 img {

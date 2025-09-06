@@ -89,6 +89,10 @@ main {
     flex-direction: column;
     gap: 35px;
 
+    @include tablet {
+        margin: 2.5rem 1.7rem;
+    }
+
     @include mobile {
         margin: 2.5rem 1.7rem;
     }
@@ -98,30 +102,127 @@ main {
         flex-direction: column;
         gap: 18px;
 
-        .to-do-header{
+        .to-do-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
 
-            h4{
+            h4 {
                 color: $text-header;
                 font-size: 1rem;
                 font-weight: 600;
             }
 
-            .button{
+            .button {
                 padding: 0.3rem 0.8rem;
+                border: 2px solid $light-blue;
+                border-radius: 10px;
+                background-color: white;
+                color: $primary-blue;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all ease-in 0.4s;
+
+                &:hover {
+                    color: white;
+                    background-color: $primary-blue;
+                    border: 2px solid $primary-blue;
+                    cursor: pointer;
+                }
             }
         }
 
-        .to-do-container {
+        .todo-task-row {
             background-color: white;
-            padding: 1.5rem;
+            color: $text-body;
+            padding: 1rem 1.5rem;
             box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
             border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+
+            .task {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .todo-task {
+                    accent-color: $light-green;
+                    appearance: none;
+                    border: 1px solid $deep-green;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: relative;
+
+                    &:checked {
+                        background-color: $check-green;
+                        border-color: $check-green;
+                    }
+
+                    &:checked::after {
+                        content: "";
+                        position: absolute;
+                        top: 1.8px;
+                        left: 5px;
+                        width: 4px;
+                        height: 8px;
+                        border: solid green;
+                        border-width: 0 3px 3px 0;
+                        transform: rotate(45deg);
+                    }
+                }
+
+                img {
+                    width: 25px;
+                }
+            }
+
+            .category {
+                background-color: $light-green;
+                color: $deep-green;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+
+                @include mobile {
+                    display: none;
+                }
+            }
+
+            .date {
+                background-color: $light-yellow;
+                color: $deep-yellow;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+
+                @include mobile {
+                    display: none;
+                }
+            }
+
+            .delete-btn {
+                font-size: 1rem;
+                color: $text-body;
+                border: none;
+                transition: all ease-in 0.3s;
+                background-color: transparent;
+                box-shadow: none;
+
+                &:hover {
+                    cursor: pointer;
+                    color: gray;
+                }
+            }
         }
     }
 }
+
 
 img {
     width: 40px;
