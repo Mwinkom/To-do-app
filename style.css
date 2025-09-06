@@ -1,3 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: rgb(250, 242, 242);
+  margin: 2.5rem 0;
+}
+
+header {
+  display: flex;
+  padding-inline: 2.7rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 375px) {
+  header {
+    padding-inline: 1.5rem;
+  }
+}
+@media (max-width: 765px) {
+  header {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+header .logo h2 {
+  color: #0078b8;
+  font-size: 1.2rem;
+}
+header .search-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+@media (max-width: 765px) {
+  header .search-container {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+header .search-container #search-input {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+}
+header .search-container #search-input:focus {
+  outline: none;
+}
+header .search-container button {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+}
+header .search-container button:hover {
+  cursor: pointer;
+}
+header .search-container button i {
+  color: #91c8f8;
+}
+
+main {
+  margin: 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+@media (max-width: 375px) {
+  main {
+    margin: 2.5rem 1.7rem;
+  }
+}
+main .card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+main .card-wrapper .to-do-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .card-wrapper .to-do-header h4 {
+  color: rgb(65, 65, 65);
+  font-size: 1rem;
+  font-weight: 600;
+}
+main .card-wrapper .to-do-header .button {
+  padding: 0.3rem 0.8rem;
+}
+main .card-wrapper .to-do-container {
+  background-color: white;
+  padding: 1.5rem;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+  border-radius: 10px;
+}
+
+img {
+  width: 40px;
+}
 
 /*# sourceMappingURL=style.css.map */

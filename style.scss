@@ -1,0 +1,128 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(250, 242, 242);
+    margin: 2.5rem 0;
+}
+
+header {
+    display: flex;
+    padding-inline: 2.7rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include mobile {
+        padding-inline: 1.5rem;
+    }
+
+    @include tablet {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h2 {
+            color: $primary-blue;
+            font-size: 1.2rem;
+        }
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 0.6rem 1rem;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 300px;
+        box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+
+        @include tablet {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        #search-input {
+            appearance: none;
+            border: none;
+            background-color: transparent;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            i {
+                color: $light-blue;
+            }
+        }
+    }
+}
+
+main {
+    margin: 3.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    @include mobile {
+        margin: 2.5rem 1.7rem;
+    }
+
+    .card-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+
+        .to-do-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h4{
+                color: $text-header;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .button{
+                padding: 0.3rem 0.8rem;
+            }
+        }
+
+        .to-do-container {
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+            border-radius: 10px;
+        }
+    }
+}
+
+img {
+    width: 40px;
+}

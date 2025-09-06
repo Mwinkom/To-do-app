@@ -3,11 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="">
+    <title>To-do app</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
-    <script src=""></script>
+    <header>
+        <div class="logo">
+            <img src="assets/images/to-do.png" alt="logo">
+            <h2>To-do App</h2>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search your tasks ... " id="search-input">
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </header>
+    <main>
+        <section class="card-wrapper">
+            <div class="to-do-header">
+                    <h4>Pending Tasks</h4>
+                    <button type="button" id="add-btn" class="button">Add <i class="fa-solid fa-plus"></i></button>
+            </div>
+            <section class="to-do-container">
+                <div class="label-container">
+                    <p>Tasks</p>
+                    <p>Categories</p>
+                    <p>Due Date</p>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <input type="checkbox" id="todo-task-1" class="todo-task">
+                        <label class="task-text" for="todo-task-1">Wash the dishes</label>
+                    </div>
+                    <p class="category">Personal</p>
+                    <p class="date">10/9/2025</p>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <input type="checkbox" id="todo-tasks-2" class="todo-task">
+                        <label class="task-text" for="todo-tasks-2">Reply my emails</label>
+                    </div>
+                    <p class="category">Work</p>
+                    <p class="date">25/9/2025</p>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </section>
+        </section>
+
+        <section class="card-wrapper">
+            <div class="to-do-header">
+                <h4>Completed Tasks</h4>
+                <button type="button" id="clear-btn" class="button">Clear All</i></button>
+            </div>
+            <section class="to-do-container">
+                <div class="label-container">
+                    <p>Task</p>
+                    <p>Categories</p>
+                    <p>Due Date</p>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <img src="assets/images/check-mark.png" alt="">
+                        <p class="task-text" for="todo-task-1">Clean my room</p>
+                    </div>
+                    <p class="category">Personal</p>
+                    <p class="date">6/9/2025</p>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <img src="assets/images/check-mark.png" alt="">
+                        <p class="task-text" for="todo-tasks-2">Study Cloud Engineering</p>
+                    </div>
+                    <p class="category">School</p>
+                    <p class="date">6/9/2025</p>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
