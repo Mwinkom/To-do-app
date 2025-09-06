@@ -54,14 +54,19 @@ header .search-container {
     width: 100%;
   }
 }
+header .search-container:focus-within {
+  box-shadow: 0 0 6px 2px #91c8f8;
+}
 header .search-container #search-input {
   appearance: none;
   border: none;
   background-color: transparent;
   font-size: 1rem;
+  color: rgb(79, 79, 79);
 }
 header .search-container #search-input:focus {
   outline: none;
+  background-color: transparent;
 }
 header .search-container button {
   border: none;
@@ -75,54 +80,55 @@ header .search-container button i {
   color: #91c8f8;
 }
 
-main {
+.filled-state {
   margin: 3.5rem 4rem;
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 40px;
+  display: none;
 }
 @media (max-width: 765px) {
-  main {
+  .filled-state {
     margin: 2.5rem 1.7rem;
   }
 }
 @media (max-width: 456px) {
-  main {
+  .filled-state {
     margin: 2.5rem 1.7rem;
   }
 }
-main .card-wrapper {
+.filled-state .card-wrapper {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
-main .card-wrapper .to-do-header {
+.filled-state .card-wrapper .to-do-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-main .card-wrapper .to-do-header h4 {
+.filled-state .card-wrapper .to-do-header h4 {
   color: rgb(79, 79, 79);
   font-size: 1rem;
   font-weight: 600;
 }
-main .card-wrapper .to-do-header .button {
-  padding: 0.3rem 0.8rem;
-  border: 2px solid #91c8f8;
-  border-radius: 10px;
+.filled-state .card-wrapper .to-do-header .button {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #91c8f8;
+  border-radius: 18px;
   background-color: white;
   color: #0078b8;
-  font-weight: 600;
+  font-weight: 550;
   font-size: 0.9rem;
   transition: all ease-in 0.4s;
 }
-main .card-wrapper .to-do-header .button:hover {
+.filled-state .card-wrapper .to-do-header .button:hover {
   color: white;
   background-color: #0078b8;
   border: 2px solid #0078b8;
   cursor: pointer;
 }
-main .card-wrapper .todo-task-row {
+.filled-state .card-wrapper .todo-task-row {
   background-color: white;
   color: rgb(95, 95, 95);
   padding: 1rem 1.5rem;
@@ -134,12 +140,12 @@ main .card-wrapper .todo-task-row {
   align-items: center;
   justify-content: space-between;
 }
-main .card-wrapper .todo-task-row .task {
+.filled-state .card-wrapper .todo-task-row .task {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-main .card-wrapper .todo-task-row .task .todo-task {
+.filled-state .card-wrapper .todo-task-row .task .todo-task {
   accent-color: rgb(212, 255, 203);
   appearance: none;
   border: 1px solid rgb(58, 136, 43);
@@ -149,11 +155,11 @@ main .card-wrapper .todo-task-row .task .todo-task {
   display: inline-block;
   position: relative;
 }
-main .card-wrapper .todo-task-row .task .todo-task:checked {
+.filled-state .card-wrapper .todo-task-row .task .todo-task:checked {
   background-color: rgb(151, 242, 133);
   border-color: rgb(151, 242, 133);
 }
-main .card-wrapper .todo-task-row .task .todo-task:checked::after {
+.filled-state .card-wrapper .todo-task-row .task .todo-task:checked::after {
   content: "";
   position: absolute;
   top: 1.8px;
@@ -164,10 +170,10 @@ main .card-wrapper .todo-task-row .task .todo-task:checked::after {
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
-main .card-wrapper .todo-task-row .task img {
+.filled-state .card-wrapper .todo-task-row .task img {
   width: 25px;
 }
-main .card-wrapper .todo-task-row .category {
+.filled-state .card-wrapper .todo-task-row .category {
   background-color: rgb(212, 255, 203);
   color: rgb(58, 136, 43);
   padding: 5px 10px;
@@ -175,11 +181,11 @@ main .card-wrapper .todo-task-row .category {
   font-size: 0.9rem;
 }
 @media (max-width: 456px) {
-  main .card-wrapper .todo-task-row .category {
+  .filled-state .card-wrapper .todo-task-row .category {
     display: none;
   }
 }
-main .card-wrapper .todo-task-row .date {
+.filled-state .card-wrapper .todo-task-row .date {
   background-color: rgb(254, 212, 255);
   color: rgb(160, 27, 162);
   padding: 5px 10px;
@@ -187,11 +193,11 @@ main .card-wrapper .todo-task-row .date {
   font-size: 0.9rem;
 }
 @media (max-width: 456px) {
-  main .card-wrapper .todo-task-row .date {
+  .filled-state .card-wrapper .todo-task-row .date {
     display: none;
   }
 }
-main .card-wrapper .todo-task-row .delete-btn {
+.filled-state .card-wrapper .todo-task-row .delete-btn {
   font-size: 1rem;
   color: rgb(95, 95, 95);
   border: none;
@@ -199,9 +205,61 @@ main .card-wrapper .todo-task-row .delete-btn {
   background-color: transparent;
   box-shadow: none;
 }
-main .card-wrapper .todo-task-row .delete-btn:hover {
+.filled-state .card-wrapper .todo-task-row .delete-btn:hover {
   cursor: pointer;
   color: gray;
+}
+
+.empty-state {
+  margin: 3.5rem 4rem;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+@media (max-width: 765px) {
+  .empty-state {
+    margin: 2.5rem 1.7rem;
+  }
+}
+.empty-state .promo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+.empty-state .promo-text h4 {
+  color: rgb(79, 79, 79);
+  font-size: 1.2rem;
+}
+.empty-state .promo-text p {
+  color: rgb(95, 95, 95);
+}
+.empty-state img {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  display: block;
+}
+.empty-state button {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #91c8f8;
+  border-radius: 18px;
+  background-color: white;
+  color: #0078b8;
+  font-weight: 550;
+  font-size: 1rem;
+  transition: all ease-in 0.4s;
+  width: 200px;
+}
+.empty-state button:hover {
+  color: white;
+  background-color: #0078b8;
+  border: 2px solid #0078b8;
+  cursor: pointer;
 }
 
 img {

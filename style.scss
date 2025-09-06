@@ -56,14 +56,20 @@ header {
             width: 100%;
         }
 
+        &:focus-within {
+            box-shadow: 0 0 6px 2px $light-blue; // change border or glow color
+        }
+
         #search-input {
             appearance: none;
             border: none;
             background-color: transparent;
             font-size: 1rem;
+            color: $text-header;
 
             &:focus {
                 outline: none;
+                background-color: transparent;
             }
         }
 
@@ -83,11 +89,12 @@ header {
     }
 }
 
-main {
+.filled-state {
     margin: 3.5rem 4rem;
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 40px;
+    display: none;
 
     @include tablet {
         margin: 2.5rem 1.7rem;
@@ -114,12 +121,12 @@ main {
             }
 
             .button {
-                padding: 0.3rem 0.8rem;
-                border: 2px solid $light-blue;
-                border-radius: 10px;
+                padding: 0.5rem 1rem;
+                border: 1.5px solid $light-blue;
+                border-radius: 18px;
                 background-color: white;
                 color: $primary-blue;
-                font-weight: 600;
+                font-weight: 550;
                 font-size: 0.9rem;
                 transition: all ease-in 0.4s;
 
@@ -221,6 +228,64 @@ main {
             }
         }
     }
+}
+
+.empty-state {
+    margin: 3.5rem 4rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 34px;
+
+    @include tablet {
+        margin: 2.5rem 1.7rem;
+    }
+
+    .promo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+
+        h4 {
+            color: $text-header;
+            font-size: 1.2rem;
+        }
+
+        p {
+            color: $text-body;
+        }
+    }
+
+    img {
+        width: 100%;
+        max-width: 30rem;
+        height: auto;
+        display: block;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        border: 1.5px solid $light-blue;
+        border-radius: 18px;
+        background-color: white;
+        color: $primary-blue;
+        font-weight: 550;
+        font-size: 1rem;
+        transition: all ease-in 0.4s;
+        width: 200px;
+
+        &:hover {
+            color: white;
+            background-color: $primary-blue;
+            border: 2px solid $primary-blue;
+            cursor: pointer;
+        }
+    }
+
 }
 
 

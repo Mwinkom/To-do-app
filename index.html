@@ -23,63 +23,74 @@
         </div>
     </header>
     <main>
-        <section class="card-wrapper">
-            <div class="to-do-header">
-                <h4>Pending Tasks</h4>
-                <button type="button" id="add-btn" class="button">Add <i class="fa-solid fa-plus"></i></button>
-            </div>
-            <div class="todo-task-row">
-                <div class="task">
-                    <input type="checkbox" id="todo-task-1" class="todo-task">
-                    <label class="task-text" for="todo-task-1">Wash the dishes</label>
+        <section class="filled-state">
+
+            <section class="card-wrapper" id="pending-container">
+                <div class="to-do-header">
+                    <h4>Pending Tasks</h4>
+                    <button type="button" id="add-btn" class="button">Add <i class="fa-solid fa-plus"></i></button>
                 </div>
-                <p class="category">Personal</p>
-                <p class="date">10/9/2025</p>
-                <button class="delete-btn">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-            <div class="todo-task-row">
-                <div class="task">
-                    <input type="checkbox" id="todo-tasks-2" class="todo-task">
-                    <label class="task-text" for="todo-tasks-2">Reply my emails</label>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <input type="checkbox" id="todo-task-1" class="todo-task">
+                        <label class="task-text" for="todo-task-1">Wash the dishes</label>
+                    </div>
+                    <p class="category">Personal</p>
+                    <p class="date">10/9/2025</p>
+                    <button class="delete-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
-                <p class="category">Work</p>
-                <p class="date">25/9/2025</p>
-                <button class="delete-btn">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <input type="checkbox" id="todo-tasks-2" class="todo-task">
+                        <label class="task-text" for="todo-tasks-2">Reply my emails</label>
+                    </div>
+                    <p class="category">Work</p>
+                    <p class="date">25/9/2025</p>
+                    <button class="delete-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section class="card-wrapper" id="completed-container">
+                <div class="to-do-header">
+                    <h4>Completed Tasks</h4>
+                    <button type="button" id="clear-btn" class="button">Clear All</i></button>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <img src="assets/images/check-mark.png" alt="">
+                        <p class="task-text" for="todo-task-1">Clean my room</p>
+                    </div>
+                    <p class="category">Personal</p>
+                    <p class="date">6/9/2025</p>
+                    <button class="delete-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+                <div class="todo-task-row">
+                    <div class="task">
+                        <img src="assets/images/check-mark.png" alt="">
+                        <p class="task-text" for="todo-tasks-2">Study Cloud</p>
+                    </div>
+                    <p class="category">School</p>
+                    <p class="date">6/9/2025</p>
+                    <button class="delete-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </section>
         </section>
 
-        <section class="card-wrapper">
-            <div class="to-do-header">
-                <h4>Completed Tasks</h4>
-                <button type="button" id="clear-btn" class="button">Clear All</i></button>
+        <section class="empty-state">
+            <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869740.png" alt="">
+            <div class="promo-text">
+                <h4>Add a new task!</h4>
+                <p>Start your productivity journey today</p>
             </div>
-
-            <div class="todo-task-row">
-                <div class="task">
-                    <img src="assets/images/check-mark.png" alt="">
-                    <p class="task-text" for="todo-task-1">Clean my room</p>
-                </div>
-                <p class="category">Personal</p>
-                <p class="date">6/9/2025</p>
-                <button class="delete-btn">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-            <div class="todo-task-row">
-                <div class="task">
-                    <img src="assets/images/check-mark.png" alt="">
-                    <p class="task-text" for="todo-tasks-2">Study Cloud Engineering</p>
-                </div>
-                <p class="category">School</p>
-                <p class="date">6/9/2025</p>
-                <button class="delete-btn">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
+            <button class="add-task-btn">Add New Task</button>
         </section>
     </main>
     <script src="script.js"></script>
