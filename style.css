@@ -85,7 +85,6 @@ header .search-container button i {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  display: none;
 }
 @media (max-width: 765px) {
   .filled-state {
@@ -295,9 +294,16 @@ header .search-container button i {
   justify-content: center;
   align-items: center;
   backdrop-filter: brightness(0.3);
+  pointer-events: none;
   width: 100%;
   height: 100%;
   padding-inline: 1rem;
+  opacity: 0;
+  transition: all ease-in 0.3s;
+}
+.modal-container.active-modal {
+  opacity: 1;
+  pointer-events: auto;
 }
 .modal-container .modal {
   display: flex;
@@ -309,6 +315,8 @@ header .search-container button i {
   width: 100%;
   gap: 30px;
   max-width: 500px;
+  opacity: 0;
+  transition: all ease-in 0.3s;
   box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
 }
 @media (max-width: 456px) {
@@ -335,6 +343,7 @@ header .search-container button i {
   cursor: pointer;
 }
 .modal-container .modal .task-input-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -386,24 +395,24 @@ header .search-container button i {
   transform: rotate(-180deg);
 }
 .modal-container .modal .task-input-container #categories {
+  position: absolute;
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid rgb(95, 95, 95);
   border-radius: 7px;
   background-color: white;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  position: absolute;
-  top: calc(100% + 5px);
+  top: 80px;
   left: 0;
   width: 100%;
   z-index: 20;
-  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px;
+  box-shadow: none;
 }
 .modal-container .modal .task-input-container #categories.show {
   max-height: 200px;
+  box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px;
 }
 .modal-container .modal .task-input-container #categories li {
   padding: 0.6rem 0.8rem;
@@ -438,6 +447,10 @@ img {
 
 .hidden {
   display: none;
+}
+
+.modal-container.active-modal .modal {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=style.css.map */
