@@ -1,0 +1,533 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(250, 242, 242);
+    margin: 2.5rem 0;
+}
+
+header {
+    display: flex;
+    padding-inline: 2.7rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include mobile {
+        padding-inline: 1.5rem;
+    }
+
+    @include tablet {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h2 {
+            color: $primary-blue;
+            font-size: 1.2rem;
+        }
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 0.6rem 1rem;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 300px;
+        box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+
+        @include tablet {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        &:focus-within {
+            box-shadow: 0 0 6px 2px $light-blue; // change border or glow color
+        }
+
+        #search-input {
+            appearance: none;
+            border: none;
+            background-color: transparent;
+            font-size: 1rem;
+            color: $text-header;
+
+            &:focus {
+                outline: none;
+                background-color: transparent;
+            }
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            i {
+                color: $light-blue;
+            }
+        }
+    }
+}
+
+
+
+
+.filled-state {
+    margin: 3.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include tablet {
+        margin: 2.5rem 1.7rem;
+    }
+
+    @include mobile {
+        margin: 2.5rem 1.7rem;
+    }
+
+    .card-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+
+        .to-do-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h4 {
+                color: $text-header;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .button {
+                padding: 0.5rem 1rem;
+                border: 1.5px solid $light-blue;
+                border-radius: 18px;
+                background-color: white;
+                color: $primary-blue;
+                font-weight: 550;
+                font-size: 0.9rem;
+                transition: all ease-in 0.4s;
+
+                &:hover {
+                    color: white;
+                    background-color: $primary-blue;
+                    border: 2px solid $primary-blue;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .todo-task-row {
+            background-color: white;
+            color: $text-body;
+            padding: 1rem 1.5rem;
+            box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .left {
+                display: flex;
+                flex-direction: row;
+
+                .task {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    width: 10rem;
+                    flex: 0 0 15rem;
+                    min-width: 8rem;
+                    max-width: 20rem;
+
+                    @include tablet {
+                        flex: 0 0 10rem;
+                    }
+
+                    @include mobile {
+                        flex: 0 0 12rem;
+                    }
+
+                    .todo-task {
+                        accent-color: $light-green;
+                        appearance: none;
+                        border: 1px solid $deep-green;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        position: relative;
+                        flex-shrink: 0;
+
+                        &:checked {
+                            background-color: $check-green;
+                            border-color: $check-green;
+                        }
+
+                        &:checked::after {
+                            content: "";
+                            position: absolute;
+                            top: 1.8px;
+                            left: 5px;
+                            width: 4px;
+                            height: 8px;
+                            border: solid green;
+                            border-width: 0 3px 3px 0;
+                            transform: rotate(45deg);
+                        }
+                    }
+
+                    img {
+                        width: 25px;
+                    }
+                }
+
+                .meta {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+
+                    .category {
+                        background-color: $light-green;
+                        color: $deep-green;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+
+                        @include mobile {
+                            display: none;
+                        }
+                    }
+
+                    .date {
+                        background-color: $light-yellow;
+                        color: $deep-yellow;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+
+                        @include mobile {
+                            display: none;
+                        }
+                    }
+
+                }
+
+            }
+
+            .delete-btn {
+                font-size: 1rem;
+                color: $text-body;
+                border: none;
+                transition: all ease-in 0.3s;
+                background-color: transparent;
+                box-shadow: none;
+                flex-shrink: 0;
+
+                &:hover {
+                    cursor: pointer;
+                    color: gray;
+                }
+            }
+        }
+    }
+}
+
+.empty-state {
+    margin: 3.5rem 4rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 34px;
+
+    @include tablet {
+        margin: 2.5rem 1.7rem;
+    }
+
+    .promo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        text-align: center;
+
+        h4 {
+            color: $text-header;
+            font-size: 1.2rem;
+        }
+
+        p {
+            color: $text-body;
+        }
+    }
+
+    img {
+        width: 100%;
+        max-width: 30rem;
+        height: auto;
+        display: block;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        border: 1.5px solid $light-blue;
+        border-radius: 18px;
+        background-color: white;
+        color: $primary-blue;
+        font-weight: 550;
+        font-size: 1rem;
+        transition: all ease-in 0.4s;
+        width: 200px;
+
+        &:hover {
+            color: white;
+            background-color: $primary-blue;
+            border: 2px solid $primary-blue;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.modal-container {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(0.3);
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    padding-inline: 1rem;
+    opacity: 0;
+    transition: all ease-in 0.3s;
+
+    &.active-modal {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        padding: 1.7rem 2.2rem;
+        border-radius: 18px;
+        width: 100%;
+        gap: 30px;
+        max-width: 500px;
+        opacity: 0;
+        transition: all ease-in 0.3s;
+        box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+
+        @include mobile {
+            padding: 1.7rem 1.2rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+
+            h1 {
+                color: rgb(57, 57, 57);
+            }
+
+            button {
+                font-size: 1rem;
+                background-color: transparent;
+                border: none;
+                color: $primary-blue;
+                transition: all ease-in 0.2s;
+
+                &:hover {
+                    color: $light-blue;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .task-input-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            color: $text-header;
+
+            label,
+            .category-header {
+                font-weight: 600;
+                font-size: 1.2rem;
+                color: $primary-blue;
+            }
+
+            input {
+                padding: 0.6rem 0.8rem;
+                border-radius: 7px;
+                border: 1px solid $text-body;
+                transition: all ease-in 0.2s;
+                font-size: 1rem;
+                font-family: 'Poppins', sans-serif;
+                color: $text-header;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 1px 2px $light-blue;
+                    border: 1px solid $primary-blue;
+                }
+
+                &.error {
+                    outline: none;
+                    box-shadow: 0 0 1px 2px $light-red;
+                    border: 1px solid $red;
+                }
+            }
+
+            .error-text {
+                color: $red;
+                font-size: 0.9rem;
+
+                i {
+                    color: rgb(193, 75, 75);
+                }
+            }
+
+            .select-label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: white;
+                border: 1px solid $text-body;
+                border-radius: 7px;
+                padding: 0.6rem 0.8rem;
+                transition: all ease-in 0.2s;
+                cursor: pointer;
+
+                &.error {
+                    outline: none;
+                    box-shadow: 0 0 1px 2px $light-red;
+                    border: 1px solid $red;
+                }
+
+                p {
+                    color: $text-header;
+                    font-size: 1rem;
+                }
+
+                i {
+                    color: $primary-blue;
+                    transition: transform 0.3s ease;
+                }
+
+                &.active {
+                    border: 1px solid $primary-blue;
+                    box-shadow: 0 0 1px 2px $light-blue;
+
+                    i {
+                        transform: rotate(-180deg);
+                    }
+                }
+            }
+
+            #categories {
+                position: absolute;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                border-radius: 7px;
+                background-color: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                z-index: 20;
+                box-shadow: none;
+
+                &.show {
+                    max-height: 200px;
+                    box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px,
+                        rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px,
+                        rgba(42, 51, 70, 0.04) 0px 2px 2px -1px;
+                }
+
+                li {
+                    padding: 0.6rem 0.8rem;
+                    font-size: 0.95rem;
+                    color: $text-body;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: $light-blue;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
+    #add-modal-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        color: white;
+        background-color: $primary-blue;
+        border: 2px solid $primary-blue;
+
+
+        font-weight: 550;
+        font-size: 1rem;
+        transition: all ease-in 0.4s;
+
+        &:hover {
+            background-color: $light-blue;
+            border: 2px solid $light-blue;
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+img {
+    width: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-container.active-modal .modal {
+    opacity: 1;
+}
