@@ -30,35 +30,8 @@
                     <h4>Pending Tasks</h4>
                     <button type="button" id="add-btn" class="button">Add <i class="fa-solid fa-plus"></i></button>
                 </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <input type="checkbox" id="todo-task-1" class="todo-task">
-                            <label class="task-text" for="todo-task-1">Wash the dishes</label>
-                        </div>
-                        <div class="meta">
-                            <p class="category">Personal</p>
-                            <p class="date">10/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <input type="checkbox" id="todo-tasks-2" class="todo-task">
-                            <label class="task-text" for="todo-tasks-2">Reply my emails</label>
-                        </div>
-                        <div class="meta">
-                            <p class="category">Work</p>
-                            <p class="date">25/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                <div class="pending-task-wrapper">
+                   
                 </div>
             </section>
 
@@ -122,7 +95,8 @@
             <div class="task-input-container">
                 <label for="task-input">Task</label>
                 <input type="text" placeholder="Task description" id="task-input" required>
-                <p class="error-text description-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please input your task
+                <p class="error-text description-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please
+                    input your task
                     description</p>
 
             </div>
@@ -138,13 +112,15 @@
                     <li>Study</li>
                     <li>Health & Fitness</li>
                 </ul>
-                <p class="error-text category-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please select a category first</p>
+                <p class="error-text category-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please
+                    select a category first</p>
 
             </div>
             <div class="task-input-container">
                 <label for="date">Date</label>
                 <input type="date" id="date" required>
-                <p class="error-text hidden date-error"><i class="fa-solid fa-triangle-exclamation"></i> Please select a date first</p>
+                <p class="error-text hidden date-error"><i class="fa-solid fa-triangle-exclamation"></i> Please select a
+                    date first</p>
 
             </div>
             <button type="button" id="add-modal-btn">Add Task</button>

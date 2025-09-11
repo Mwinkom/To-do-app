@@ -5,7 +5,18 @@ const modalContainer = document.querySelector(".modal-container");
 const addNewTask = document.querySelector(".add-task-btn");
 const categories = document.getElementById("categories");
 const addTask = document.getElementById("add-modal-btn");
+const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
+const filledState = document.querySelector(".filled-state");
 let categoryValue;
+let tasks = [];
+
+class Task {
+  constructor(description, category, date) {
+    this.description = description;
+    this.category = category;
+    this.date = date;
+  }
+}
 
 categories.addEventListener("click", (e) => {
   const target = e.target;
@@ -27,31 +38,34 @@ addTask.addEventListener("click", () => {
   console.log(`Category Value: ${categoryValue}`);
 
   if (descriptionValue.trim() === "") {
-    descriptionErrorText.classList.remove('hidden');
-    description.classList.add('error');
+    descriptionErrorText.classList.remove("hidden");
+    description.classList.add("error");
+  } else {
+    descriptionErrorText.classList.add("hidden");
+    description.classList.remove("error");
   }
-  else{
-    descriptionErrorText.classList.add('hidden');
-    description.classList.remove('error');
-  }
-  
+
   if (dateValue.trim() === "") {
-    dateErrorText.classList.remove('hidden');
-    date.classList.add('error');
-  }
-  else{
-    dateErrorText.classList.add('hidden');
-    date.classList.remove('error');
+    dateErrorText.classList.remove("hidden");
+    date.classList.add("error");
+  } else {
+    dateErrorText.classList.add("hidden");
+    date.classList.remove("error");
   }
 
   if (categoryValue === undefined) {
-    categoryErrorText.classList.remove('hidden');
-    category.classList.add('error');
+    categoryErrorText.classList.remove("hidden");
+    category.classList.add("error");
+  } else {
+    categoryErrorText.classList.add("hidden");
+    category.classList.remove("error");
   }
-  else{
-    categoryErrorText.classList.add('hidden');
-    category.classList.remove('error');
-  }
+
+  addUserTask(descriptionValue, categoryValue, dateValue);
+
+  filledState.classList.remove("hidden");
+
+  modalContainer.classList.toggle("active-modal");
 });
 
 addNewTask.addEventListener("click", () => {
@@ -81,3 +95,30 @@ dropdown.querySelectorAll("li").forEach((item) => {
     dropdown.classList.remove("show");
   });
 });
+
+function addUserTask(descriptionInput, categoryInput, dateInput) {
+  const myTask = new Task(descriptionInput, categoryInput, dateInput);
+  tasks.push(myTask);
+
+  console.log(tasks);
+
+  tasks.forEach((task) => {
+    const taskRow = ` <div class="todo-task-row">
+                        <div class="left">
+                            <div class="task">
+                                <input type="checkbox" id="todo-task-1" class="todo-task">
+                                <label class="task-text" for="todo-task-1">${task.description}</label>
+                            </div>
+                            <div class="meta">
+                                <p class="category">${task.category}</p>
+                                <p class="date">${task.date}</p>
+                            </div>
+                        </div>
+                        <button class="delete-btn">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>`;
+
+    pendingTaskContainer.innerHTML = taskRow;
+  });
+}
