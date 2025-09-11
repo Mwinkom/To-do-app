@@ -384,7 +384,8 @@ header {
             gap: 9px;
             color: $text-header;
 
-            label {
+            label,
+            .category-header {
                 font-weight: 600;
                 font-size: 1.2rem;
                 color: $primary-blue;
@@ -404,6 +405,21 @@ header {
                     box-shadow: 0 0 1px 2px $light-blue;
                     border: 1px solid $primary-blue;
                 }
+
+                &.error {
+                    outline: none;
+                    box-shadow: 0 0 1px 2px $light-red;
+                    border: 1px solid $red;
+                }
+            }
+
+            .error-text {
+                color: $red;
+                font-size: 0.9rem;
+
+                i {
+                    color: rgb(193, 75, 75);
+                }
             }
 
             .select-label {
@@ -416,6 +432,12 @@ header {
                 padding: 0.6rem 0.8rem;
                 transition: all ease-in 0.2s;
                 cursor: pointer;
+
+                &.error {
+                    outline: none;
+                    box-shadow: 0 0 1px 2px $light-red;
+                    border: 1px solid $red;
+                }
 
                 p {
                     color: $text-header;
@@ -506,6 +528,6 @@ img {
     display: none;
 }
 
-.modal-container.active-modal .modal{
+.modal-container.active-modal .modal {
     opacity: 1;
 }

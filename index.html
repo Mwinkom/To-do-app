@@ -23,7 +23,7 @@
         </div>
     </header>
     <main>
-        <section class="filled-state">
+        <section class="filled-state hidden">
 
             <section class="card-wrapper" id="pending-container">
                 <div class="to-do-header">
@@ -110,39 +110,46 @@
             <button class="add-task-btn">Add New Task</button>
         </section>
 
-        
+
     </main>
 
-    <section class="modal-container">
-            <div class="modal">
-                <div class="modal-header">
-                    <h1>Add New Task</h1>
-                    <button type="button" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="task-input-container">
-                    <label for="task-input">Task</label>
-                    <input type="text" placeholder="Task description" id="task-input">
-                </div>
-                <div class="task-input-container">
-                    <label for="categories">Category</label>
-                    <div class="select-label">
-                        <p>Select Category</p>
-                        <i class="fa-solid fa-caret-down"></i>
-                    </div>
-                    <ul id="categories">
-                        <li value="work">Work</li>
-                        <li value="personal">Personal</li>
-                        <li value="study">Study</li>
-                        <li value="health">Health & Fitness</li>
-                    </ul>
-                </div>
-                <div class="task-input-container">
-                    <label for="date">Date</label>
-                    <input type="date" id="date">
-                </div>
-                <button type="button" id="add-modal-btn">Add Task</button>
+    <section class="modal-container active-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h1>Add New Task</h1>
+                <button type="button" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
-        </section>
+            <div class="task-input-container">
+                <label for="task-input">Task</label>
+                <input type="text" placeholder="Task description" id="task-input" required>
+                <p class="error-text description-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please input your task
+                    description</p>
+
+            </div>
+            <div class="task-input-container">
+                <p class="category-header">Category</p>
+                <div class="select-label">
+                    <p>Select Category</p>
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+                <ul id="categories">
+                    <li>Work</li>
+                    <li>Personal</li>
+                    <li>Study</li>
+                    <li>Health & Fitness</li>
+                </ul>
+                <p class="error-text category-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please select a category first</p>
+
+            </div>
+            <div class="task-input-container">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+                <p class="error-text hidden date-error"><i class="fa-solid fa-triangle-exclamation"></i> Please select a date first</p>
+
+            </div>
+            <button type="button" id="add-modal-btn">Add Task</button>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
 

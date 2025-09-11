@@ -349,7 +349,8 @@ header .search-container button i {
   gap: 9px;
   color: rgb(79, 79, 79);
 }
-.modal-container .modal .task-input-container label {
+.modal-container .modal .task-input-container label,
+.modal-container .modal .task-input-container .category-header {
   font-weight: 600;
   font-size: 1.2rem;
   color: #0078b8;
@@ -368,6 +369,18 @@ header .search-container button i {
   box-shadow: 0 0 1px 2px #91c8f8;
   border: 1px solid #0078b8;
 }
+.modal-container .modal .task-input-container input.error {
+  outline: none;
+  box-shadow: 0 0 1px 2px rgb(255, 179, 179);
+  border: 1px solid rgb(198, 62, 62);
+}
+.modal-container .modal .task-input-container .error-text {
+  color: rgb(198, 62, 62);
+  font-size: 0.9rem;
+}
+.modal-container .modal .task-input-container .error-text i {
+  color: rgb(193, 75, 75);
+}
 .modal-container .modal .task-input-container .select-label {
   display: flex;
   justify-content: space-between;
@@ -378,6 +391,11 @@ header .search-container button i {
   padding: 0.6rem 0.8rem;
   transition: all ease-in 0.2s;
   cursor: pointer;
+}
+.modal-container .modal .task-input-container .select-label.error {
+  outline: none;
+  box-shadow: 0 0 1px 2px rgb(255, 179, 179);
+  border: 1px solid rgb(198, 62, 62);
 }
 .modal-container .modal .task-input-container .select-label p {
   color: rgb(79, 79, 79);
