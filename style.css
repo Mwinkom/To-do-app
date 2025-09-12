@@ -127,6 +127,11 @@ header .search-container button i {
   border: 2px solid #0078b8;
   cursor: pointer;
 }
+.filled-state .card-wrapper .pending-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 .filled-state .card-wrapper .todo-task-row {
   background-color: white;
   color: rgb(95, 95, 95);

@@ -4,11 +4,20 @@ const closeButton = document.querySelector(".close-btn");
 const modalContainer = document.querySelector(".modal-container");
 const addNewTask = document.querySelector(".add-task-btn");
 const categories = document.getElementById("categories");
+const addButton = document.getElementById("add-btn");
 const addTask = document.getElementById("add-modal-btn");
 const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
 const filledState = document.querySelector(".filled-state");
+const emptyState = document.querySelector(".empty-state");
+const descriptionErrorText = document.querySelector(".description-error");
+const categoryErrorText = document.querySelector(".category-error");
+const dateErrorText = document.querySelector(".date-error");
+const description = document.getElementById("task-input");
+const category = document.querySelector(".select-label");
+const date = document.getElementById("date");
+let isValid = true;
 let categoryValue;
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("taskList")) || [];
 
 class Task {
   constructor(description, category, date) {
@@ -24,67 +33,48 @@ categories.addEventListener("click", (e) => {
 });
 
 addTask.addEventListener("click", () => {
-  const description = document.getElementById("task-input");
-  const category = document.querySelector(".select-label");
-  const date = document.getElementById("date");
   const descriptionValue = description.value;
   const dateValue = date.value;
-  const descriptionErrorText = document.querySelector(".description-error");
-  const categoryErrorText = document.querySelector(".category-error");
-  const dateErrorText = document.querySelector(".date-error");
+  isValid = true;
 
   console.log(`Task Description: ${descriptionValue}`);
   console.log(`Date Value: ${dateValue}`);
   console.log(`Category Value: ${categoryValue}`);
 
-  if (descriptionValue.trim() === "") {
-    descriptionErrorText.classList.remove("hidden");
-    description.classList.add("error");
-  } else {
-    descriptionErrorText.classList.add("hidden");
-    description.classList.remove("error");
-  }
+  formValidator(dateValue, descriptionValue);
 
-  if (dateValue.trim() === "") {
-    dateErrorText.classList.remove("hidden");
-    date.classList.add("error");
-  } else {
-    dateErrorText.classList.add("hidden");
-    date.classList.remove("error");
-  }
-
-  if (categoryValue === undefined) {
-    categoryErrorText.classList.remove("hidden");
-    category.classList.add("error");
-  } else {
-    categoryErrorText.classList.add("hidden");
-    category.classList.remove("error");
-  }
+  if (isValid === false) return;
 
   addUserTask(descriptionValue, categoryValue, dateValue);
-
-  filledState.classList.remove("hidden");
-
-  modalContainer.classList.toggle("active-modal");
+  clearForm();
 });
 
 addNewTask.addEventListener("click", () => {
-  modalContainer.classList.toggle("active-modal");
+  modalContainer.classList.add("active-modal");
 });
 
 closeButton.addEventListener("click", () => {
-  modalContainer.classList.toggle("active-modal");
+  closeModal();
 });
 
 modalContainer.addEventListener("click", (event) => {
   if (event.target === modalContainer) {
-    modalContainer.classList.toggle("active-modal");
+    closeModal();
   }
 });
 
 selectLabel.addEventListener("click", () => {
   selectLabel.classList.toggle("active");
   dropdown.classList.toggle("show");
+});
+
+addButton.addEventListener("click", () => {
+  addNewTask.click();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    retrieveTasks();
+    renderTasks();
 });
 
 // Handle selecting an option
@@ -96,11 +86,69 @@ dropdown.querySelectorAll("li").forEach((item) => {
   });
 });
 
+//Add new Task
 function addUserTask(descriptionInput, categoryInput, dateInput) {
   const myTask = new Task(descriptionInput, categoryInput, dateInput);
   tasks.push(myTask);
+  storeTasks();
+  renderTasks();
+  modalContainer.classList.remove("active-modal");
+}
 
+//Form Validation
+function formValidator(dateInput, descriptionInput) {
+  if (descriptionInput.trim() === "") {
+    descriptionErrorText.classList.remove("hidden");
+    description.classList.add("error");
+    isValid = false;
+  } else {
+    descriptionErrorText.classList.add("hidden");
+    description.classList.remove("error");
+  }
+
+  if (dateInput.trim() === "") {
+    dateErrorText.classList.remove("hidden");
+    date.classList.add("error");
+    isValid = false;
+  } else {
+    dateErrorText.classList.add("hidden");
+    date.classList.remove("error");
+  }
+
+  if (categoryValue === undefined || categoryValue === "") {
+    categoryErrorText.classList.remove("hidden");
+    category.classList.add("error");
+    isValid = false;
+  } else {
+    categoryErrorText.classList.add("hidden");
+    category.classList.remove("error");
+  }
+}
+
+function clearForm() {
+  description.value = "";
+  date.value = "";
+  categoryValue = "";
+  category.querySelector("p").textContent = "Select Category";
+}
+
+function closeModal() {
+  modalContainer.classList.remove("active-modal");
+  clearForm();
+}
+
+function storeTasks() {
+  localStorage.setItem("taskList", JSON.stringify(tasks));
+  console.log(localStorage);
+}
+
+function retrieveTasks() {
+  tasks = JSON.parse(localStorage.getItem("taskList")) || [];
   console.log(tasks);
+}
+
+function renderTasks() {
+  pendingTaskContainer.innerHTML = "";
 
   tasks.forEach((task) => {
     const taskRow = ` <div class="todo-task-row">
@@ -119,6 +167,18 @@ function addUserTask(descriptionInput, categoryInput, dateInput) {
                         </button>
                     </div>`;
 
-    pendingTaskContainer.innerHTML = taskRow;
+    pendingTaskContainer.innerHTML += taskRow;
   });
+
+
+  if (tasks.length == 0){
+    filledState.classList.add("hidden");
+    emptyState.classList.remove("hidden");
+  }
+  else{
+    filledState.classList.remove("hidden");
+    emptyState.classList.add("hidden");
+  }
+  
 }
+

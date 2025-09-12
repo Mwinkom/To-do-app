@@ -141,6 +141,12 @@ header {
             }
         }
 
+        .pending-task-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 18px
+        }
+
         .todo-task-row {
             background-color: white;
             color: $text-body;
