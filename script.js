@@ -32,6 +32,20 @@ categories.addEventListener("click", (e) => {
   categoryValue = target.textContent;
 });
 
+pendingTaskContainer.addEventListener('click',(e) => {
+  if(e.target.closest('.delete-btn')){
+    let taskRow = e.target.closest('.todo-task-row');
+    let taskDescription = taskRow.querySelector('.task-text').textContent;
+    console.log(taskDescription);
+    tasks = tasks.filter(
+      task => task.description !== taskDescription
+    );
+
+    storeTasks();
+    renderTasks();
+  }
+})
+
 addTask.addEventListener("click", () => {
   const descriptionValue = description.value;
   const dateValue = date.value;
@@ -182,3 +196,6 @@ function renderTasks() {
   
 }
 
+  // tasks = tasks.filter(task => 
+  //   task.description !== 'Beat boys'
+  // );
