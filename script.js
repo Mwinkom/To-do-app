@@ -73,6 +73,19 @@ pendingTaskContainer.addEventListener("change", (e) => {
   }
 });
 
+completedTaskContainer.addEventListener("click", (e) => {
+  if (e.target.closest(".delete-btn")) {
+    const taskDescription = getTaskDescription(e);
+    completedTasks = completedTasks.filter(
+      (task) => task.description !== taskDescription
+    );
+
+    storeCompletedTasks();
+    renderTasks();
+    feedbackToast("Your task was deleted successfully");
+  }
+});
+
 addTask.addEventListener("click", () => {
   const descriptionValue = description.value;
   const dateValue = date.value;
