@@ -284,6 +284,11 @@ header {
         margin: 2.5rem 1.7rem;
     }
 
+    &.no-padding{
+        margin: 0;
+        padding: 0;
+    }
+
     .promo-text {
         display: flex;
         flex-direction: column;
@@ -583,9 +588,10 @@ img {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .modal-container.active-modal .modal {
     opacity: 1;
 }
+

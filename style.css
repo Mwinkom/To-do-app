@@ -258,6 +258,10 @@ header .search-container button i {
     margin: 2.5rem 1.7rem;
   }
 }
+.empty-state.no-padding {
+  margin: 0;
+  padding: 0;
+}
 .empty-state .promo-text {
   display: flex;
   flex-direction: column;
@@ -514,7 +518,7 @@ img {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .modal-container.active-modal .modal {

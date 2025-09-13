@@ -8,6 +8,8 @@ const addButton = document.getElementById("add-btn");
 const addTask = document.getElementById("add-modal-btn");
 const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
 const completedTaskContainer = document.querySelector('.completed-task-wrapper');
+const pendingSection = document.getElementById('pending-container');
+const completedSection = document.getElementById('completed-container');
 const filledState = document.querySelector(".filled-state");
 const emptyState = document.querySelector(".empty-state");
 const descriptionErrorText = document.querySelector(".description-error");
@@ -16,6 +18,7 @@ const dateErrorText = document.querySelector(".date-error");
 const description = document.getElementById("task-input");
 const category = document.querySelector(".select-label");
 const date = document.getElementById("date");
+const clearAllBtn = document.getElementById('clear-btn');
 let isValid = true;
 let categoryValue;
 let pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
@@ -34,13 +37,21 @@ categories.addEventListener("click", (e) => {
   categoryValue = target.textContent;
 });
 
+clearAllBtn.addEventListener('click', () => {
+  console.log('Clear button clicked')
+  localStorage.removeItem('completedTasks');
+  completedTasks = [];
+  renderTasks();
+  feedbackToast('All completed tasks have been cleared!');
+})
+
 pendingTaskContainer.addEventListener("click", (e) => {
   if (e.target.closest(".delete-btn")) {
     const taskDescription = getTaskDescription(e);
     pendingTasks = pendingTasks.filter(
       (task) => task.description !== taskDescription
     );
-
+ 
     storePendingTasks();
     renderTasks();
     feedbackToast("Your task was deleted successfully");
@@ -85,6 +96,8 @@ completedTaskContainer.addEventListener("click", (e) => {
     feedbackToast("Your task was deleted successfully");
   }
 });
+
+
 
 addTask.addEventListener("click", () => {
   const descriptionValue = description.value;
@@ -218,6 +231,14 @@ function renderTasks() {
   pendingTaskContainer.innerHTML = "";
   completedTaskContainer.innerHTML = "";
 
+  if (typeof completedTasks === 'null') {
+    filledState.classList.remove("hidden");
+    completedSection.classList.add("hidden");
+    emptyState.classList.add("hidden");
+    pendingSection.classList.remove("hidden");
+    return;
+  }
+
   pendingTasks.forEach((task) => {
     const taskRow = ` <div class="todo-task-row">
                         <div class="left">
@@ -258,12 +279,30 @@ function renderTasks() {
     completedTaskContainer.innerHTML += completedTaskRow;
   });
 
-  if (pendingTasks.length == 0) {
+  if (pendingTasks.length == 0 && completedTasks.length == 0) {
     filledState.classList.add("hidden");
     emptyState.classList.remove("hidden");
-  } else {
+  }
+  else if(pendingTasks.length == 0 && completedTasks.length > 0){
     filledState.classList.remove("hidden");
+    completedSection.classList.remove("hidden");
+    pendingSection.classList.add("hidden");
+    emptyState.classList.remove("hidden");
+    emptyState.classList.add('no-padding');
+    filledState.style.gap = '20px';
+  }
+  else if(completedTasks.length == 0 && pendingTasks.length > 0){
+    filledState.classList.remove("hidden");
+    completedSection.classList.add("hidden");
     emptyState.classList.add("hidden");
+    pendingSection.classList.remove("hidden");
+  }
+  else {
+    filledState.classList.remove("hidden");
+    completedSection.classList.remove("hidden");
+    pendingSection.classList.remove("hidden");
+    emptyState.classList.add("hidden");
+    filledState.style.gap = '40px';
   }
 }
 
