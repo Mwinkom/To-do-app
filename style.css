@@ -132,6 +132,11 @@ header .search-container button i {
   flex-direction: column;
   gap: 18px;
 }
+.filled-state .card-wrapper .completed-task-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 .filled-state .card-wrapper .todo-task-row {
   background-color: white;
   color: rgb(95, 95, 95);
@@ -462,6 +467,46 @@ header .search-container button i {
   background-color: #91c8f8;
   border: 2px solid #91c8f8;
   cursor: pointer;
+}
+
+.feedback-toast {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  color: rgb(79, 79, 79);
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 18px;
+  border-radius: 12px;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity ease-in 0.4s, transform ease-in 0.4s;
+  box-shadow: 4px 6px 10px 3px rgb(212, 255, 203);
+}
+.feedback-toast .feedback-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.feedback-toast .feedback-text .feedback-header {
+  color: rgb(48, 48, 48);
+  font-weight: 700;
+}
+.feedback-toast i {
+  background-color: rgb(126, 213, 86);
+  color: white;
+  padding: 10px;
+  font-size: 1.3rem;
+  border-radius: 7px;
+}
+.feedback-toast.show {
+  opacity: 1;
+  transform: translate(-50%, calc(-50% + 20px));
 }
 
 img {

@@ -147,6 +147,12 @@ header {
             gap: 18px
         }
 
+        .completed-task-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 18px
+        }
+
         .todo-task-row {
             background-color: white;
             color: $text-body;
@@ -522,6 +528,52 @@ header {
             cursor: pointer;
         }
     }
+}
+
+.feedback-toast{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    color: $text-header ;
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 18px;
+    border-radius: 12px;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity ease-in 0.4s, transform ease-in 0.4s;
+    box-shadow: 4px 6px 10px 3px $light-green;
+
+
+    .feedback-text{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .feedback-header{
+        color: rgb(48, 48, 48);
+        font-weight: 700;
+    }
+    }
+
+    i{
+        background-color: rgb(126, 213, 86);
+        color: white;
+        padding: 10px;
+        font-size: 1.3rem;
+        border-radius: 7px;
+    }
+
+    &.show{
+        opacity: 1;
+        transform: translate(-50%, calc(-50% + 20px));
+    }
+
 }
 
 

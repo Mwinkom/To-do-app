@@ -7,6 +7,7 @@ const categories = document.getElementById("categories");
 const addButton = document.getElementById("add-btn");
 const addTask = document.getElementById("add-modal-btn");
 const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
+const completedTaskContainer = document.querySelector('.completed-task-wrapper');
 const filledState = document.querySelector(".filled-state");
 const emptyState = document.querySelector(".empty-state");
 const descriptionErrorText = document.querySelector(".description-error");
@@ -17,7 +18,8 @@ const category = document.querySelector(".select-label");
 const date = document.getElementById("date");
 let isValid = true;
 let categoryValue;
-let tasks = JSON.parse(localStorage.getItem("taskList")) || [];
+let pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
+let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
 class Task {
   constructor(description, category, date) {
@@ -32,19 +34,44 @@ categories.addEventListener("click", (e) => {
   categoryValue = target.textContent;
 });
 
-pendingTaskContainer.addEventListener('click',(e) => {
-  if(e.target.closest('.delete-btn')){
-    let taskRow = e.target.closest('.todo-task-row');
-    let taskDescription = taskRow.querySelector('.task-text').textContent;
-    console.log(taskDescription);
-    tasks = tasks.filter(
-      task => task.description !== taskDescription
+pendingTaskContainer.addEventListener("click", (e) => {
+  if (e.target.closest(".delete-btn")) {
+    const taskDescription = getTaskDescription(e);
+    pendingTasks = pendingTasks.filter(
+      (task) => task.description !== taskDescription
     );
 
-    storeTasks();
+    storePendingTasks();
     renderTasks();
+    feedbackToast("Your task was deleted successfully");
   }
-})
+});
+
+pendingTaskContainer.addEventListener("change", (e) => {
+  let checkBox = e.target.closest(".todo-task");
+  if (checkBox.checked) {
+    if (checkBox) {
+      const taskDescription = getTaskDescription(e);
+
+      let [filteredTask] = pendingTasks.filter(
+        task => task.description == taskDescription
+      );
+
+      if(filteredTask){
+        completedTasks.push(filteredTask);
+      }
+
+      pendingTasks = pendingTasks.filter(
+        task => task.description !== taskDescription
+      );
+
+      storeCompletedTasks();
+      storePendingTasks();
+      renderTasks();
+      feedbackToast('Congratulations, you completed your task!')
+    }
+  }
+});
 
 addTask.addEventListener("click", () => {
   const descriptionValue = description.value;
@@ -87,8 +114,8 @@ addButton.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    retrieveTasks();
-    renderTasks();
+  retrievePendingTasks();
+  renderTasks();
 });
 
 // Handle selecting an option
@@ -103,9 +130,10 @@ dropdown.querySelectorAll("li").forEach((item) => {
 //Add new Task
 function addUserTask(descriptionInput, categoryInput, dateInput) {
   const myTask = new Task(descriptionInput, categoryInput, dateInput);
-  tasks.push(myTask);
-  storeTasks();
+  pendingTasks.push(myTask);
+  storePendingTasks();
   renderTasks();
+  feedbackToast("New task added successfully!");
   modalContainer.classList.remove("active-modal");
 }
 
@@ -151,20 +179,33 @@ function closeModal() {
   clearForm();
 }
 
-function storeTasks() {
-  localStorage.setItem("taskList", JSON.stringify(tasks));
+function storePendingTasks() {
+  localStorage.setItem("taskList", JSON.stringify(pendingTasks));
   console.log(localStorage);
 }
 
-function retrieveTasks() {
-  tasks = JSON.parse(localStorage.getItem("taskList")) || [];
-  console.log(tasks);
+function retrievePendingTasks() {
+  pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
+  console.log(pendingTasks);
 }
+
+function storeCompletedTasks() {
+  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+  console.log(localStorage);
+}
+
+function retrieveCompletedTasks() {
+  completedTasks = JSON.parse(localStorage.getItem("completedTasks"));
+  console.log(completedTasks);
+}
+
+function addCompletedTask() {}
 
 function renderTasks() {
   pendingTaskContainer.innerHTML = "";
+  completedTaskContainer.innerHTML = "";
 
-  tasks.forEach((task) => {
+  pendingTasks.forEach((task) => {
     const taskRow = ` <div class="todo-task-row">
                         <div class="left">
                             <div class="task">
@@ -184,18 +225,48 @@ function renderTasks() {
     pendingTaskContainer.innerHTML += taskRow;
   });
 
+  completedTasks.forEach((task) => {
+    const completedTaskRow = `<div class="todo-task-row">
+                                <div class="left">
+                                    <div class="task">
+                                        <img src="assets/images/check-mark.png" alt="">
+                                        <p class="task-text" for="todo-task-1">${task.description}</p>
+                                    </div>
+                                    <div class="meta">
+                                        <p class="category">${task.category}</p>
+                                        <p class="date">${task.date}</p>
+                                    </div>
+                                </div>
+                                <button class="delete-btn">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>`;
 
-  if (tasks.length == 0){
+    completedTaskContainer.innerHTML += completedTaskRow;
+  });
+
+  if (pendingTasks.length == 0) {
     filledState.classList.add("hidden");
     emptyState.classList.remove("hidden");
-  }
-  else{
+  } else {
     filledState.classList.remove("hidden");
     emptyState.classList.add("hidden");
   }
-  
 }
 
-  // tasks = tasks.filter(task => 
-  //   task.description !== 'Beat boys'
-  // );
+function feedbackToast(message) {
+  const feedbackMessage = document.querySelector(".feedback-message");
+  const feedbackToast = document.querySelector(".feedback-toast");
+  feedbackMessage.textContent = message;
+  feedbackToast.classList.add("show");
+
+  setTimeout(() => {
+    feedbackToast.classList.remove("show");
+  }, 3000);
+}
+
+function getTaskDescription(event) {
+  let taskRow = event.target.closest(".todo-task-row");
+  let taskDescription = taskRow.querySelector(".task-text").textContent;
+  return taskDescription;
+}
