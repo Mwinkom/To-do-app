@@ -358,6 +358,7 @@ function searchFilter(value) {
   if(filteredPendingTasks.length == 0 && filteredCompletedTasks == 0){
      filledState.classList.add('hidden');
      searchNotFound.classList.remove('hidden');
+     emptyState.classList.add('hidden');
      return;
   }
 
