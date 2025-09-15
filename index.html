@@ -17,23 +17,13 @@
         </div>
         <div class="search-container">
             <input type="text" placeholder="Search your tasks ... " id="search-input">
-            <button type="submit">
+            <button type="submit" class="search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
     </header>
     <main>
         <section class="filled-state hidden">
-
-            <section class="empty-state">
-                <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869740.png"
-                    alt="">
-                <div class="promo-text">
-                    <h4>Add a new task!</h4>
-                    <p>Start your productivity journey today</p>
-                </div>
-                <button class="add-task-btn" type="button">Add New Task</button>
-            </section>
 
             <section class="card-wrapper" id="pending-container">
                 <div class="to-do-header">
@@ -96,6 +86,25 @@
 
             </div>
             <button type="button" id="add-modal-btn">Add Task</button>
+        </div>
+    </section>
+
+    <section class="empty-state illustation-container">
+        <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869740.png"
+            alt="">
+        <div class="promo-text">
+            <h4>Add a new task!</h4>
+            <p>Start your productivity journey today</p>
+        </div>
+        <button class="add-task-btn" type="button">Add New Task</button>
+    </section>
+
+    <section class="no-search-found illustation-container hidden">
+        <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869738.png"
+            alt="">
+        <div class="promo-text">
+            <h4>Task not found!</h4>
+            <p>Please try again</p>
         </div>
     </section>
 

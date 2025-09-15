@@ -270,7 +270,7 @@ header {
     }
 }
 
-.empty-state {
+.illustation-container {
     margin: 3.5rem 4rem;
     padding: 1rem 1.5rem;
     border-radius: 10px;
@@ -287,6 +287,7 @@ header {
     &.no-padding{
         margin: 0;
         padding: 0;
+        margin-top: 50px;
     }
 
     .promo-text {

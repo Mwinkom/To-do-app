@@ -243,7 +243,7 @@ header .search-container button i {
   color: gray;
 }
 
-.empty-state {
+.illustation-container {
   margin: 3.5rem 4rem;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -254,35 +254,36 @@ header .search-container button i {
   gap: 34px;
 }
 @media (max-width: 765px) {
-  .empty-state {
+  .illustation-container {
     margin: 2.5rem 1.7rem;
   }
 }
-.empty-state.no-padding {
+.illustation-container.no-padding {
   margin: 0;
   padding: 0;
+  margin-top: 50px;
 }
-.empty-state .promo-text {
+.illustation-container .promo-text {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
   text-align: center;
 }
-.empty-state .promo-text h4 {
+.illustation-container .promo-text h4 {
   color: rgb(79, 79, 79);
   font-size: 1.2rem;
 }
-.empty-state .promo-text p {
+.illustation-container .promo-text p {
   color: rgb(95, 95, 95);
 }
-.empty-state img {
+.illustation-container img {
   width: 100%;
   max-width: 30rem;
   height: auto;
   display: block;
 }
-.empty-state button {
+.illustation-container button {
   padding: 0.5rem 1rem;
   border: 1.5px solid #91c8f8;
   border-radius: 18px;
@@ -293,7 +294,7 @@ header .search-container button i {
   transition: all ease-in 0.4s;
   width: 200px;
 }
-.empty-state button:hover {
+.illustation-container button:hover {
   color: white;
   background-color: #0078b8;
   border: 2px solid #0078b8;
