@@ -17,7 +17,7 @@
         </div>
         <div class="search-container">
             <input type="text" placeholder="Search your tasks ... " id="search-input">
-            <button type="submit">
+            <button type="submit" class="search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
@@ -30,35 +30,8 @@
                     <h4>Pending Tasks</h4>
                     <button type="button" id="add-btn" class="button">Add <i class="fa-solid fa-plus"></i></button>
                 </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <input type="checkbox" id="todo-task-1" class="todo-task">
-                            <label class="task-text" for="todo-task-1">Wash the dishes</label>
-                        </div>
-                        <div class="meta">
-                            <p class="category">Personal</p>
-                            <p class="date">10/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <input type="checkbox" id="todo-tasks-2" class="todo-task">
-                            <label class="task-text" for="todo-tasks-2">Reply my emails</label>
-                        </div>
-                        <div class="meta">
-                            <p class="category">Work</p>
-                            <p class="date">25/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                <div class="pending-task-wrapper">
+
                 </div>
             </section>
 
@@ -67,53 +40,15 @@
                     <h4>Completed Tasks</h4>
                     <button type="button" id="clear-btn" class="button">Clear All</i></button>
                 </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <img src="assets/images/check-mark.png" alt="">
-                            <p class="task-text" for="todo-task-1">Clean my room</p>
-                        </div>
-                        <div class="meta">
-                            <p class="category">Personal</p>
-                            <p class="date">6/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-                <div class="todo-task-row">
-                    <div class="left">
-                        <div class="task">
-                            <img src="assets/images/check-mark.png" alt="">
-                            <p class="task-text" for="todo-tasks-2">Study Cloud</p>
-                        </div>
-                        <div class="meta">
-                            <p class="category">School</p>
-                            <p class="date">6/9/2025</p>
-                        </div>
-                    </div>
-                    <button class="delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                <div class="completed-task-wrapper">
+
                 </div>
             </section>
         </section>
 
-        <section class="empty-state">
-            <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869740.png"
-                alt="">
-            <div class="promo-text">
-                <h4>Add a new task!</h4>
-                <p>Start your productivity journey today</p>
-            </div>
-            <button class="add-task-btn">Add New Task</button>
-        </section>
-
-
     </main>
 
-    <section class="modal-container active-modal">
+    <section class="modal-container">
         <div class="modal">
             <div class="modal-header">
                 <h1>Add New Task</h1>
@@ -122,7 +57,8 @@
             <div class="task-input-container">
                 <label for="task-input">Task</label>
                 <input type="text" placeholder="Task description" id="task-input" required>
-                <p class="error-text description-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please input your task
+                <p class="error-text description-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please
+                    input your task
                     description</p>
 
             </div>
@@ -138,18 +74,47 @@
                     <li>Study</li>
                     <li>Health & Fitness</li>
                 </ul>
-                <p class="error-text category-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please select a category first</p>
+                <p class="error-text category-error hidden"><i class="fa-solid fa-triangle-exclamation"></i> Please
+                    select a category first</p>
 
             </div>
             <div class="task-input-container">
                 <label for="date">Date</label>
                 <input type="date" id="date" required>
-                <p class="error-text hidden date-error"><i class="fa-solid fa-triangle-exclamation"></i> Please select a date first</p>
+                <p class="error-text hidden date-error"><i class="fa-solid fa-triangle-exclamation"></i> Please select a
+                    date first</p>
 
             </div>
             <button type="button" id="add-modal-btn">Add Task</button>
         </div>
     </section>
+
+    <section class="empty-state illustation-container">
+        <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869740.png"
+            alt="">
+        <div class="promo-text">
+            <h4>Add a new task!</h4>
+            <p>Start your productivity journey today</p>
+        </div>
+        <button class="add-task-btn" type="button">Add New Task</button>
+    </section>
+
+    <section class="no-search-found illustation-container hidden">
+        <img src="assets/images/vecteezy_faq-concept-illustration-people-looking-through-magnifying_10869738.png"
+            alt="">
+        <div class="promo-text">
+            <h4>Task not found!</h4>
+            <p>Please try again</p>
+        </div>
+    </section>
+
+    <div class="feedback-toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class=" feedback-text">
+            <p class="feedback-header">Success</p>
+            <p class="feedback-message">This is the feedback</p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
