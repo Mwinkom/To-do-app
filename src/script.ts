@@ -1,34 +1,45 @@
-const selectLabel = document.querySelector(".select-label");
-const dropdown = document.querySelector("#categories");
-const closeButton = document.querySelector(".close-btn");
-const modalContainer = document.querySelector(".modal-container");
-const addNewTask = document.querySelector(".add-task-btn");
-const categories = document.getElementById("categories");
-const addButton = document.getElementById("add-btn");
-const addTask = document.getElementById("add-modal-btn");
-const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
-const completedTaskContainer = document.querySelector('.completed-task-wrapper');
-const pendingSection = document.getElementById('pending-container');
-const completedSection = document.getElementById('completed-container');
-const filledState = document.querySelector(".filled-state");
-const emptyState = document.querySelector(".empty-state");
-const descriptionErrorText = document.querySelector(".description-error");
-const categoryErrorText = document.querySelector(".category-error");
-const dateErrorText = document.querySelector(".date-error");
-const description = document.getElementById("task-input");
-const category = document.querySelector(".select-label");
-const date = document.getElementById("date");
-const clearAllBtn = document.getElementById('clear-btn');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.querySelector('.search-btn');
-const searchNotFound = document.querySelector('.no-search-found');
+const selectLabel = document.querySelector(".select-label") as HTMLElement;
+const dropdown = document.querySelector("#categories") as HTMLElement;
+const closeButton = document.querySelector(".close-btn") as HTMLButtonElement;
+const modalContainer = document.querySelector(".modal-container") as HTMLElement;
+const addNewTask = document.querySelector(".add-task-btn") as HTMLButtonElement;
+const categories = document.getElementById("categories") as HTMLElement;
+const addButton = document.getElementById("add-btn") as HTMLButtonElement;
+const addTask = document.getElementById("add-modal-btn") as HTMLElement;
+const pendingTaskContainer = document.querySelector(".pending-task-wrapper") as HTMLElement;
+const completedTaskContainer = document.querySelector('.completed-task-wrapper') as HTMLElement;
+const pendingSection = document.getElementById('pending-container') as HTMLElement;
+const completedSection = document.getElementById('completed-container') as HTMLElement;
+const filledState = document.querySelector(".filled-state") as HTMLElement;
+const emptyState = document.querySelector(".empty-state") as HTMLElement;
+const descriptionErrorText = document.querySelector(".description-error") as HTMLElement;
+const categoryErrorText = document.querySelector(".category-error") as HTMLElement;
+const dateErrorText = document.querySelector(".date-error") as HTMLElement;
+const description = document.getElementById("task-input") as HTMLInputElement;
+const category = document.querySelector(".select-label") as HTMLInputElement;
+const date = document.getElementById("date") as HTMLInputElement;
+const clearAllBtn = document.getElementById('clear-btn') as HTMLButtonElement;
+const searchInput = document.getElementById('search-input') as HTMLInputElement;
+const searchBtn = document.querySelector('.search-btn') as HTMLButtonElement;
+const searchNotFound = document.querySelector('.no-search-found') as HTMLElement;
 let isValid = true;
-let categoryValue;
-let pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
-let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+let categoryValue: string;
+let pendingTasks: TaskInterface[] = JSON.parse(localStorage.getItem("taskList") || '[]') ;
+let completedTasks: TaskInterface[] = JSON.parse(localStorage.getItem("completedTasks")  || '[]');
 
-class Task {
-  constructor(description, category, date) {
+interface TaskInterface{
+  description: string
+  category: string
+  date: string
+}
+
+
+class Task{
+  description: string;
+  category: string;
+  date: string;
+
+  constructor(description: string, category: string, date: string) {
     this.description = description;
     this.category = category;
     this.date = date;
@@ -36,8 +47,15 @@ class Task {
 }
 
 categories.addEventListener("click", (e) => {
-  const target = e.target;
-  categoryValue = target.textContent;
+  const target = e.target as HTMLElement | null;
+
+  if(target && target.textContent){
+    categoryValue = target.textContent;
+  }
+  else{
+    categoryValue = '';
+  }
+
 });
 
 clearAllBtn.addEventListener('click', () => {
@@ -49,20 +67,31 @@ clearAllBtn.addEventListener('click', () => {
 })
 
 pendingTaskContainer.addEventListener("click", (e) => {
-  if (e.target.closest(".delete-btn")) {
-    const taskDescription = getTaskDescription(e);
-    pendingTasks = pendingTasks.filter(
-      (task) => task.description !== taskDescription
-    );
- 
-    storePendingTasks();
-    renderTasks(pendingTasks, completedTasks);
-    feedbackToast("Your task was deleted successfully");
-  }
+  const target = e.target as HTMLElement | null;
+  if (!target) return;
+
+  const deleteBtn = target.closest(".delete-btn") as HTMLButtonElement;
+  if (!deleteBtn) return null;
+
+  const taskDescription = getTaskDescription(e);
+  pendingTasks = pendingTasks.filter(
+    (task) => task.description !== taskDescription
+  );
+
+  storePendingTasks();
+  renderTasks(pendingTasks, completedTasks);
+  feedbackToast("Your task was deleted successfully");
 });
 
 pendingTaskContainer.addEventListener("change", (e) => {
-  let checkBox = e.target.closest(".todo-task");
+  const target = e.target as HTMLElement | null;
+  
+  if (!target) return;
+  
+  let checkBox = target.closest(".todo-task") as HTMLInputElement | null;
+
+  if (!checkBox) return;
+  
   if (checkBox.checked) {
     if (checkBox) {
       const taskDescription = getTaskDescription(e);
@@ -88,16 +117,20 @@ pendingTaskContainer.addEventListener("change", (e) => {
 });
 
 completedTaskContainer.addEventListener("click", (e) => {
-  if (e.target.closest(".delete-btn")) {
-    const taskDescription = getTaskDescription(e);
-    completedTasks = completedTasks.filter(
-      (task) => task.description !== taskDescription
-    );
+  const target = e.target as HTMLElement | null;
+  if (!target) return;
 
-    storeCompletedTasks();
-    renderTasks(pendingTasks, completedTasks);
-    feedbackToast("Your task was deleted successfully");
-  }
+  const deleteBtn = target.closest(".delete-btn") as HTMLButtonElement;
+  if (!deleteBtn) return null;
+
+  const taskDescription = getTaskDescription(e);
+  completedTasks = completedTasks.filter(
+    (task) => task.description !== taskDescription
+  );
+
+  storeCompletedTasks();
+  renderTasks(pendingTasks, completedTasks);
+  feedbackToast("Your task was deleted successfully");
 });
 
 searchBtn.addEventListener('click', () => {
@@ -117,7 +150,7 @@ addTask.addEventListener("click", () => {
 
   formValidator(dateValue, descriptionValue);
 
-  if (isValid === false) return;
+  if (!isValid) return;
 
   addUserTask(descriptionValue, categoryValue, dateValue);
   clearForm();
@@ -154,7 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Handle selecting an option
 dropdown.querySelectorAll("li").forEach((item) => {
   item.addEventListener("click", () => {
-    selectLabel.querySelector("p").textContent = item.textContent;
+    let p = selectLabel.querySelector("p");
+
+    if(p){
+      p.textContent = item.textContent;
+    }
+    
     selectLabel.classList.remove("active");
     dropdown.classList.remove("show");
   });
@@ -173,7 +211,7 @@ searchInput.addEventListener('input', () => {
 })
 
 //Add new Task
-function addUserTask(descriptionInput, categoryInput, dateInput) {
+function addUserTask(descriptionInput: string, categoryInput: string, dateInput: string) {
   const myTask = new Task(descriptionInput, categoryInput, dateInput);
   pendingTasks.push(myTask);
   storePendingTasks();
@@ -183,7 +221,7 @@ function addUserTask(descriptionInput, categoryInput, dateInput) {
 }
 
 //Form Validation
-function formValidator(dateInput, descriptionInput) {
+function formValidator(dateInput: string, descriptionInput: string): void{
   if (descriptionInput.trim() === "") {
     descriptionErrorText.classList.remove("hidden");
     description.classList.add("error");
@@ -216,7 +254,11 @@ function clearForm() {
   description.value = "";
   date.value = "";
   categoryValue = "";
-  category.querySelector("p").textContent = "Select Category";
+  let p = category.querySelector("p");
+
+  if(p){
+      p.textContent = "Select Category";
+  }
 }
 
 function closeModal() {
@@ -230,7 +272,7 @@ function storePendingTasks() {
 }
 
 function retrievePendingTasks() {
-  pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
+  pendingTasks = JSON.parse(localStorage.getItem("taskList")  || '[]');
   console.log(pendingTasks);
 }
 
@@ -240,21 +282,22 @@ function storeCompletedTasks() {
 }
 
 function retrieveCompletedTasks() {
-  completedTasks = JSON.parse(localStorage.getItem("completedTasks"));
+  const stored = localStorage.getItem("completedTasks") as string;
+  completedTasks = stored ? JSON.parse(stored) : [];
   console.log(completedTasks);
 }
 
-function renderTasks(pTasks, cTasks) {
+function renderTasks(pTasks: TaskInterface[], cTasks: TaskInterface[]) {
   pendingTaskContainer.innerHTML = "";
   completedTaskContainer.innerHTML = "";
 
-  if (typeof completedTasks === 'null') {
-    filledState.classList.remove("hidden");
-    completedSection.classList.add("hidden");
-    emptyState.classList.add("hidden");
-    pendingSection.classList.remove("hidden");
-    return;
-  }
+  // if (typeof completedTasks === 'null') {
+  //   filledState.classList.remove("hidden");
+  //   completedSection.classList.add("hidden");
+  //   emptyState.classList.add("hidden");
+  //   pendingSection.classList.remove("hidden");
+  //   return;
+  // }
 
   pTasks.forEach((task) => {
     const taskRow = ` <div class="todo-task-row">
@@ -280,7 +323,7 @@ function renderTasks(pTasks, cTasks) {
     const completedTaskRow = `<div class="todo-task-row">
                                 <div class="left">
                                     <div class="task">
-                                        <img src="assets/images/check-mark.png" alt="">
+                                        <img src="../assets/images/check-mark.png" alt="">
                                         <p class="task-text" for="todo-task-1">${task.description}</p>
                                     </div>
                                     <div class="meta">
@@ -327,24 +370,36 @@ function renderTasks(pTasks, cTasks) {
   }
 }
 
-function feedbackToast(message) {
+function feedbackToast(message: string) {
   const feedbackMessage = document.querySelector(".feedback-message");
   const feedbackToast = document.querySelector(".feedback-toast");
-  feedbackMessage.textContent = message;
-  feedbackToast.classList.add("show");
 
-  setTimeout(() => {
-    feedbackToast.classList.remove("show");
-  }, 3000);
+  if(feedbackMessage && feedbackToast){
+    feedbackMessage.textContent = message;
+    feedbackToast.classList.add("show");
+
+    setTimeout(() => {
+      feedbackToast.classList.remove("show");
+    }, 3000);
+  }
+  
 }
 
-function getTaskDescription(event) {
-  let taskRow = event.target.closest(".todo-task-row");
-  let taskDescription = taskRow.querySelector(".task-text").textContent;
+function getTaskDescription(event: Event) {
+  const target = event.target as HTMLElement | null;
+  if (!target) return null;
+
+  let taskRow = target.closest(".todo-task-row") as HTMLElement;
+  if (!taskRow) return null;
+
+  let taskText = taskRow.querySelector(".task-text") as HTMLElement;
+  if (!taskText) return null;
+
+  let taskDescription = taskText.textContent;
   return taskDescription;
 }
 
-function searchFilter(value) {
+function searchFilter(value: string) {
 
   const filteredPendingTasks = pendingTasks.filter(
     task => task.description.toLowerCase().includes(value) || task.category.toLowerCase() === value
@@ -355,7 +410,7 @@ function searchFilter(value) {
     );
 
 
-  if(filteredPendingTasks.length == 0 && filteredCompletedTasks == 0){
+  if(filteredPendingTasks.length == 0 && filteredCompletedTasks.length == 0){
      filledState.classList.add('hidden');
      searchNotFound.classList.remove('hidden');
      emptyState.classList.add('hidden');
