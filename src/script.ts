@@ -1,34 +1,45 @@
-const selectLabel = document.querySelector(".select-label");
-const dropdown = document.querySelector("#categories");
-const closeButton = document.querySelector(".close-btn");
-const modalContainer = document.querySelector(".modal-container");
-const addNewTask = document.querySelector(".add-task-btn");
-const categories = document.getElementById("categories");
-const addButton = document.getElementById("add-btn");
-const addTask = document.getElementById("add-modal-btn");
-const pendingTaskContainer = document.querySelector(".pending-task-wrapper");
-const completedTaskContainer = document.querySelector('.completed-task-wrapper');
-const pendingSection = document.getElementById('pending-container');
-const completedSection = document.getElementById('completed-container');
-const filledState = document.querySelector(".filled-state");
-const emptyState = document.querySelector(".empty-state");
-const descriptionErrorText = document.querySelector(".description-error");
-const categoryErrorText = document.querySelector(".category-error");
-const dateErrorText = document.querySelector(".date-error");
-const description = document.getElementById("task-input");
-const category = document.querySelector(".select-label");
-const date = document.getElementById("date");
-const clearAllBtn = document.getElementById('clear-btn');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.querySelector('.search-btn');
-const searchNotFound = document.querySelector('.no-search-found');
+const selectLabel = document.querySelector(".select-label") as HTMLElement;
+const dropdown = document.querySelector("#categories") as HTMLElement;
+const closeButton = document.querySelector(".close-btn") as HTMLButtonElement;
+const modalContainer = document.querySelector(".modal-container") as HTMLElement;
+const addNewTask = document.querySelector(".add-task-btn") as HTMLButtonElement;
+const categories = document.getElementById("categories") as HTMLElement;
+const addButton = document.getElementById("add-btn") as HTMLButtonElement;
+const addTask = document.getElementById("add-modal-btn") as HTMLElement;
+const pendingTaskContainer = document.querySelector(".pending-task-wrapper") as HTMLElement;
+const completedTaskContainer = document.querySelector('.completed-task-wrapper') as HTMLElement;
+const pendingSection = document.getElementById('pending-container') as HTMLElement;
+const completedSection = document.getElementById('completed-container') as HTMLElement;
+const filledState = document.querySelector(".filled-state") as HTMLElement;
+const emptyState = document.querySelector(".empty-state") as HTMLElement;
+const descriptionErrorText = document.querySelector(".description-error") as HTMLElement;
+const categoryErrorText = document.querySelector(".category-error") as HTMLElement;
+const dateErrorText = document.querySelector(".date-error") as HTMLElement;
+const description = document.getElementById("task-input") as HTMLInputElement;
+const category = document.querySelector(".select-label") as HTMLInputElement;
+const date = document.getElementById("date") as HTMLInputElement;
+const clearAllBtn = document.getElementById('clear-btn') as HTMLButtonElement;
+const searchInput = document.getElementById('search-input') as HTMLInputElement;
+const searchBtn = document.querySelector('.search-btn') as HTMLButtonElement;
+const searchNotFound = document.querySelector('.no-search-found') as HTMLElement;
 let isValid = true;
-let categoryValue;
+let categoryValue: string;
 let pendingTasks = JSON.parse(localStorage.getItem("taskList")) || [];
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-class Task {
-  constructor(description, category, date) {
+interface TaskInterface{
+  description: string
+  category: string
+  date: string
+}
+
+
+class Task{
+  description: string;
+  category: string;
+  date: string;
+
+  constructor(description: string, category: string, date: string) {
     this.description = description;
     this.category = category;
     this.date = date;
@@ -173,7 +184,7 @@ searchInput.addEventListener('input', () => {
 })
 
 //Add new Task
-function addUserTask(descriptionInput, categoryInput, dateInput) {
+function addUserTask(descriptionInput: string, categoryInput: string, dateInput: string) {
   const myTask = new Task(descriptionInput, categoryInput, dateInput);
   pendingTasks.push(myTask);
   storePendingTasks();
@@ -183,7 +194,7 @@ function addUserTask(descriptionInput, categoryInput, dateInput) {
 }
 
 //Form Validation
-function formValidator(dateInput, descriptionInput) {
+function formValidator(dateInput: string, descriptionInput: string): void{
   if (descriptionInput.trim() === "") {
     descriptionErrorText.classList.remove("hidden");
     description.classList.add("error");
@@ -244,7 +255,7 @@ function retrieveCompletedTasks() {
   console.log(completedTasks);
 }
 
-function renderTasks(pTasks, cTasks) {
+function renderTasks(pTasks: TaskInterface[], cTasks: TaskInterface[]) {
   pendingTaskContainer.innerHTML = "";
   completedTaskContainer.innerHTML = "";
 
@@ -280,7 +291,7 @@ function renderTasks(pTasks, cTasks) {
     const completedTaskRow = `<div class="todo-task-row">
                                 <div class="left">
                                     <div class="task">
-                                        <img src="assets/images/check-mark.png" alt="">
+                                        <img src="../assets/images/check-mark.png" alt="">
                                         <p class="task-text" for="todo-task-1">${task.description}</p>
                                     </div>
                                     <div class="meta">
@@ -327,7 +338,7 @@ function renderTasks(pTasks, cTasks) {
   }
 }
 
-function feedbackToast(message) {
+function feedbackToast(message: string) {
   const feedbackMessage = document.querySelector(".feedback-message");
   const feedbackToast = document.querySelector(".feedback-toast");
   feedbackMessage.textContent = message;
@@ -344,7 +355,7 @@ function getTaskDescription(event) {
   return taskDescription;
 }
 
-function searchFilter(value) {
+function searchFilter(value: string) {
 
   const filteredPendingTasks = pendingTasks.filter(
     task => task.description.toLowerCase().includes(value) || task.category.toLowerCase() === value
